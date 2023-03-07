@@ -1,15 +1,17 @@
 from rest_framework import serializers
-
-from .models import Product
-
-
-class ProductSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields = 'name price image color'.split()
+from products.models import Product, Category
+from colorfield.serializers import ColorField
+import uuid
 
 
-class ProductDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields = '__all__'
+class ProductListSerializer(serializers.Serializer):
+    image = serializers.ImageField()
+    title = serializers.CharField()
+    color = ColorField()
+    size = serializers.IntegerField()
+    price = serializers.FloatField()
+
+
+class ProductDateilListSerializer(ProductListSerializer):
+    text = serializers.CharField()
+    article = serializers.UUIDField()
