@@ -1,33 +1,41 @@
 from django.db import models
+import uuid
+from colorfield import fields
 
 
-CATEGORY = (
-    ('Man','мужской'),
-    ('Woman','Женский'),
-    ('Kids', 'Детские')
+class BaseModel(models.Model):
+    name = models.CharField(max_length=255)
 
-)
-
-COLOR = (
-    ('ЧЕРНЫЙ ','ЧЕРНЫЙ'),
-    ('ЖЕЛТЫЙ','ЖЕЛТЫЙ'),
-    ('БЕЛЫЙ', 'БЕЛЫЙ'),
-    ('ХАКИ', 'ХАКИ'),
-    ('СЕРЫЙ', 'СЕРЫЙ'),
-
-
-)
-#ттт
-
-class Product(models.Model):
-    objects = None
-    name = models.CharField(max_length=200)
-    description = models.TextField()
-    image = models.ImageField(null=True, blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    category = models.CharField(max_length=100,choices=CATEGORY)
-    color = models.CharField(max_length=100,choices=COLOR)
-
-
-    def __str__(self):
+    def str(self):
         return self.name
+
+    class Meta:
+        abstract = True
+
+class Brand(BaseModel):
+    pass
+
+
+class Category(BaseModel):
+    pass
+
+
+class Type(BaseModel):
+    pass
+
+
+class Product(Brand):
+    image = models.ImageField(null=True, blank=True)
+    article = models.UUIDField(default=uuid.uuid4, editable=True, unique=True)
+    text = models.TextField()
+    color = fields.ColorField()
+    size = models.PositiveSmallIntegerField()
+    price = models.FloatField()
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='products')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
+    type = models.ForeignKey(Type, on_delete=models.CASCADE, related_name='products')
+    season = models.IntegerField(choices=(
+        (1, "winter"),
+        (2, "summer"),
+        (3, "fall_and_sping"),
+    ))
