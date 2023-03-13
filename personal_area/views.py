@@ -12,14 +12,9 @@ class AccountViewSet(ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     lookup_field = 'id'
 
-    def get_serializer_class(self):
-        if self.request.method == 'POST':
-            return AccountValidateSerializer
-        else:
-            return AccountSerializer
 
     def create(self, request, *args, **kwargs):
-        serializer = AccountValidateSerializer(data=request.data)
+        serializer = AccountSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         personal_area = Account.objects.create(**serializer.validated_data)
         personal_area.save()

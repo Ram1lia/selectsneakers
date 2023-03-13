@@ -21,7 +21,7 @@ class Product(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     color = fields.ColorField()
-    size = models.PositiveSmallIntegerField(null=True, unique=True, verbose_name='Размер')
+    size = models.PositiveSmallIntegerField(null=True, verbose_name='Размер')
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, related_name='products')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     season = models.IntegerField(null=True, choices=(
