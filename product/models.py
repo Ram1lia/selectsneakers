@@ -5,17 +5,25 @@ from django.db import models
 class Brand(models.Model):
     name = models.CharField(max_length=255, verbose_name='Бренды')
 
+    def __str__(self):
+        return self.name
+
 
 class Category(models.Model):
     name = models.CharField(max_length=255, verbose_name='Категории')
+
+    def __str__(self):
+        return self.name
 
 
 class Type(models.Model):
     name = models.CharField(max_length=255, verbose_name='Тип')
 
+    def __str__(self):
+        return self.name
+
 
 class Product(models.Model):
-    # objects = None
     image = models.ImageField(null=True, blank=True)
     name = models.CharField(max_length=200)
     description = models.TextField()
@@ -32,12 +40,5 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
 
-
-
     def __str__(self):
         return self.name
-
-
-
-
-

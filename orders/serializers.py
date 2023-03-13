@@ -3,7 +3,6 @@ from rest_framework import serializers
 from orders.models import Order, OrderItem, Payment
 
 
-
 class PaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payment
@@ -18,8 +17,6 @@ class PaymentSerializer(serializers.ModelSerializer):
         if len(value) != 3 or not value.isdigit():
             raise serializers.ValidationError("CVC код должен содержать 3 цифр!")
         return value
-
-
 
 
 class OrderSerializers(serializers.ModelSerializer):

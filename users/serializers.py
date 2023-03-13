@@ -3,6 +3,7 @@ from rest_framework.serializers import *
 from users.models import User
 from rest_framework.validators import UniqueValidator
 
+
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(validators=[UniqueValidator(queryset=User.objects.all())])
     username = serializers.CharField(min_length=4, validators=[UniqueValidator(queryset=User.objects.all())])
