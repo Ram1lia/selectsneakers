@@ -6,20 +6,18 @@ from orders.models import Order, OrderItem, Payment
 from .serializers import OrderSerializers, OrderItemSerializer, PaymentSerializer
 
 
-
-
 class OrderViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = Order.objects.all()
     serializer_class = OrderSerializers
     lookup_field = 'id'
 
-
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save(user=self.request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 class OrderItemViewSet(ModelViewSet):
     queryset = OrderItem.objects.all()
@@ -30,12 +28,8 @@ class OrderItemViewSet(ModelViewSet):
 
 
 
-
 class PaymentViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
     lookup_field = "id"
-
-
-

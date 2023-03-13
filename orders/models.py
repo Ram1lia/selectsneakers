@@ -3,7 +3,6 @@ from product.models import Product
 from sneakersshop2 import settings
 
 
-
 class Payment(models.Model):
     card_number = models.CharField(max_length=16, verbose_name='Номер счета')
     date = models.DateField(verbose_name='Срок годности')
@@ -14,11 +13,8 @@ class Payment(models.Model):
         verbose_name = "Оплата"
         verbose_name_plural = "Оплаты"
 
-
     def __str__(self):
         return f"Payment {self.card_number}"
-
-
 
 
 CHOICES = (
@@ -26,8 +22,11 @@ CHOICES = (
     ('Выполнен', 'Выполнен'),
     ('Отменен', 'Отменен'),
 )
+
+
 class Order(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, verbose_name='Пользователь')#заменит User на settings.AUTH_USER_MODEL
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT,
+                             verbose_name='Пользователь')  # заменит User на settings.AUTH_USER_MODEL
     email = models.EmailField(verbose_name='Email')
     first_name = models.CharField(max_length=100, verbose_name='Имя')
     last_name = models.CharField(max_length=100, verbose_name='Фамиля')
@@ -50,8 +49,6 @@ class Order(models.Model):
         return f'Order №{self.id} Paid: {self.paid}'
 
 
-
-
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='order_items', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, related_name='order_info', on_delete=models.CASCADE)
@@ -60,7 +57,6 @@ class OrderItem(models.Model):
     class Meta:
         verbose_name = 'Инфо о заказе'
         verbose_name_plural = 'Информация о заказе'
-
 
     def __str__(self):
         return f'{self.id} {self.order}'

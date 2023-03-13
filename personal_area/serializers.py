@@ -15,9 +15,3 @@ class AccountValidateSerializer(serializers.Serializer):
     full_name = serializers.CharField(min_length=1, required=True)
     email = serializers.EmailField(required=True)
     phone = PhoneNumberField(required=True)
-    avatar = serializers.ImageField(
-        validators=[FileExtensionValidator(allowed_extensions=['jpg'])],
-        required=True
-    )
-
-

@@ -11,4 +11,3 @@ class CartViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, SearchFilter)
     search_fields = ['product', 'quantity']
     lookup_field = 'id'
-

@@ -13,10 +13,9 @@ from rest_framework.permissions import IsAuthenticated
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductListSerializer
-    permission_classes = [permissions.IsAuthenticated]
+
 
 class ProductDetailViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductDetailListSerializer
-    permission_classes = [permissions.IsAuthenticated]
     lookup_field = 'id'
