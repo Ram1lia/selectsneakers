@@ -22,12 +22,12 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/', include('users.urls')),
+    path('api/v1/', include("orders.urls")),
+    path('api/v1/', include('product.urls')),
+    path('api/v1/', include('cart.urls')),
     path('api/v1/users/', include('users.urls')),
-    path('api/v1/orders/', include("orders.urls")),
-    path('api/v1/products/', include('product.urls')),
-    path('api/v1/cart/', include('cart.urls')),
-    path('api/v1/users/', include('users.urls')),
-    path('api/v1/account/', include('personal_area.urls')),
+    path('api/v1/', include('personal_area.urls')),
     re_path(r'^swagger(<format>\.json|\.yaml)', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),

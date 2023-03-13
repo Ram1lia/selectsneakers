@@ -25,8 +25,7 @@ CHOICES = (
 
 
 class Order(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT,
-                             verbose_name='Пользователь')  # заменит User на settings.AUTH_USER_MODEL
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, verbose_name='Пользователь')  # заменит User на settings.AUTH_USER_MODEL
     email = models.EmailField(verbose_name='Email')
     first_name = models.CharField(max_length=100, verbose_name='Имя')
     last_name = models.CharField(max_length=100, verbose_name='Фамиля')

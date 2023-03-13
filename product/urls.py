@@ -6,6 +6,6 @@ get_put_delete = {'get': 'retrieve', 'put': 'update',
                   'delete': 'destroy'}
 
 urlpatterns = [
-    path('', views.ProductViewSet.as_view(get_post)),
-    path('<int:id>/', views.ProductDetailViewSet.as_view(get_put_delete))
+    path('products/', views.ProductViewSet.as_view(get_post)),
+    path('products/<int:id>/', views.ProductDetailViewSet.as_view(get_put_delete))
 ]
