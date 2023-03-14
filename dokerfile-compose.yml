@@ -1,0 +1,31 @@
+version: "3.3"
+
+services:
+  sqlite3_sneakers:
+    container_name: sqlite3_sneakers
+    image: nouchka/sqlite3:latest
+    stdin_open: true
+    tty: true
+    volumes:
+      #Modify following line
+      - ./db/:/root/db/
+    restart: unless-stopped
+
+  back_sneakers:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic
+      --no-input && gunicorn -b 0.0.0.0:8028  sneakersshop2.wsgi --reload"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - ./static:/static
+    ports:
+      - "8919:8919"
+    depends_on:
+      - sqlite3_sneakers
+    links:
+      - sqlite3_sneakers
