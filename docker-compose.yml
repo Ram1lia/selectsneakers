@@ -17,7 +17,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic
-      --no-input && gunicorn -b 0.0.0.0:8028  sneakersshop2.wsgi --reload"
+      --no-input && gunicorn -b 0.0.0.0:8919 sneakersshop2.wsgi --reload"
     env_file:
       - .env
     volumes:
