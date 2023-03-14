@@ -1,8 +1,8 @@
 version: "3.3"
 
 services:
-  sqlite3_sneakers:
-    container_name: sqlite3_sneakers
+  sqlite3_sneakersss:
+    container_name: sqlite3_sneakersss
     image: nouchka/sqlite3:latest
     stdin_open: true
     tty: true
@@ -11,7 +11,7 @@ services:
       - ./db/:/root/db/
     restart: unless-stopped
 
-  back_sneakers:
+  back_sneakersss:
     build:
       context: .
       dockerfile: Dockerfile
@@ -26,6 +26,6 @@ services:
     ports:
       - "8919:8919"
     depends_on:
-      - sqlite3_sneakers
+      - sqlite3_sneakersss
     links:
-      - sqlite3_sneakers
+      - sqlite3_sneakersss
