@@ -32,3 +32,4 @@ sqlparse==0.4.3
 tzdata==2022.7
 uritemplate==4.1.1
 urllib3==1.26.14
+gunicorn==20.1.0
