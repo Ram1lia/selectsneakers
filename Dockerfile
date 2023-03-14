@@ -1,13 +1,13 @@
 FROM python:latest
 
-RUN mkdir /app1
-WORKDIR /app1/
+RUN mkdir /app
+WORKDIR /app/
 
 COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY . /app1
+COPY . /app
 
 CMD ["python", "manage.py runserver"]
 

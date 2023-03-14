@@ -21,7 +21,7 @@ services:
     env_file:
       - .env
     volumes:
-      - .:/app1
+      - .:/app
       - ./static:/static
     ports:
       - "8919:8919"
